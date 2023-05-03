@@ -3,7 +3,7 @@ const express = require('express');
 const PORT = process.env.PORT || 5000;
 const session = require('express-session');
 const { engine } = require('express-handlebars');
-
+const connect = require('./config/connection');
 const app = express();
 
 // make handlebars engine
@@ -25,5 +25,7 @@ app.use(session({
 }));
 
 // app.use('/', routes)
+connect.sync().then(() => {
+	app.listen(PORT, () => console.log('Sever started on port %s', PORT));
+})
 
-app.listen(PORT, () => console.log('Sever started on port %s', PORT));
