@@ -1,31 +1,26 @@
 require('dotenv').config();
 const express = require('express');
+const handlebars = require('express-handlebars');
+const path = require('path');
+
 const PORT = process.env.PORT || 5000;
-const session = require('express-session');
-const { engine } = require('express-handlebars');
+
 const connect = require('./config/connection');
+const indexRouter = require('./controllers/index');
+
 const app = express();
 
-// make handlebars engine
-app.engine('hbs', engine({
-	//make extension name 'hbs' isntead of handlebars
-	extname: '.hbs',
+// setup handlebars engine
+app.engine('hbs', handlebars({
+  extname: '.hbs',
+  defaultLayout: 'main',
+  layoutsDir: path.join(__dirname, 'views', 'layouts'),
 }));
-//app.set('views', './views');
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'views'));
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use('/', indexRouter);
 
-// setup the session request
-app.use(session({
-	// logs the user into the session and make sure the client's cookie matches the secret
-	secret: process.env.SESSION_SECRET,
-	resave: false,
-	saveUninitialized: false
-}));
-
-// app.use('/', routes)
 connect.sync().then(() => {
-	app.listen(PORT, () => console.log('Sever started on port %s', PORT));
-})
-
+  app.listen(PORT, () => console.log('Server listening on port %s', PORT));
+});
