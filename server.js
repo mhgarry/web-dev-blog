@@ -1,48 +1,29 @@
-require("dotenv").config();
+require('dotenv').config();
 const express = require('express');
+const PORT = process.env.PORT || 5000;
 const session = require('express-session');
 const { engine } = require('express-handlebars');
-// const passport = require('passport');
-// const passportConfig = require('./config/passport');
 
-const PORT = process.env.PORT || 3001;
-// const routes = require('./controllers');
-const connect = require('./config/connection');
-
-// add api/hbc routes
 const app = express();
 
+// make handlebars engine
 app.engine('hbs', engine({
-  extname: '.hbs',
+	//make extension name 'hbs' isntead of handlebars
+	extname: '.hbs',
 }));
-
-app.set('view engine', 'hbs');
-app.set('views', './views');
+//app.set('views', './views');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
 
-
+// setup the session request
 app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
+	// logs the user into the session and make sure the client's cookie matches the secret
+	secret: process.env.SESSION_SECRET,
+	resave: false,
+	saveUninitialized: false
 }));
-// passportConfig(passport);
-// app.use(passport.session({
-// }));
 
+// app.use('/', routes)
 
-// app.use("/", [routes]);
-
-// app.engine('hbs', engine({
-//   extname: '.hbs' // change the file extension from .handlebars to .hbs
-// }));
-
-// app.set('view engine', 'hbs');
-// app.set('/'); // add routes in here when done
-
-connect.sync().then(() => {
-  app.listen(PORT, () => console.log('Server started on port %s', PORT));
-});
+app.listen(PORT, () => console.log('Sever started on port %s', PORT));
