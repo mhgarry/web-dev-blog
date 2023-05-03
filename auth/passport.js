@@ -8,17 +8,17 @@ passport.use(new LocalStrategy({
   passwordField: 'password',
 }, async (email, password, done) => {
   // tries to find the user by email, if it's not the correct email returns an error message
-	try {
+  try {
     const user = await User.findOne({ where: { email } });
     if (!user) {
       return done(null, false, { message: 'Incorrect email' });
     }
-		// tries to find the user by password using the hashed bcrypt password created in user model
+    // tries to find the user by password using the hashed bcrypt password created in user model
     const isValid = await user.verifyPassword(password);
     if (!isValid) {
       return done(null, false, { message: 'Incorrect password' });
     }
-		// if finds email and password user is validated
+    // if finds email and password user is validated
     return done(null, user);
   } catch (error) {
     return done(error);
