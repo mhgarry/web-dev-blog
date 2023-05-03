@@ -1,0 +1,36 @@
+/* Set up the grid container */
+body {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Add borders to each grid item for visibility */
+body > * {
+  border: 1px solid black;
+}
+
+/* Example of how to style specific grid items */
+.grid-item {
+  grid-column: 1 / 4;
+  grid-row: 1 / 4;
+  background-color: red;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+  body {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+  }
+
+  /* Example of how to style specific grid items on smaller screens */
+  .grid-item {
+    grid-column: 1 / 7;
+    grid-row: 1 / 7;
+    background-color: blue;
+  }
+}

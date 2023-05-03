@@ -3,6 +3,6 @@ const homeRouter = require('./index_test_route');
 const authRouter = require('./authRoutes');
 
 router.use('/', homeRouter);
-router.use('/dashboard', authRouter);
-
+router.use('/register', authRouter);
+// router.use('/dashboard', 'viewRotes');
 module.exports = router;

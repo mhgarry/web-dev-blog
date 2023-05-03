@@ -1,7 +1,7 @@
-/* eslint-disable linebreak-style */
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/User');
+
 // creates a new passport strategy to authenticate instace of User model
 passport.use(new LocalStrategy({
   usernameField: 'email',
@@ -24,12 +24,13 @@ passport.use(new LocalStrategy({
     return done(error);
   }
 }));
-// eslint-disable-next-line max-len
+
 // gives the user access to protected routes through serializing their model instance for this session
 // finds user by the id automatically created by the user model
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
+
 // when the user leaves takes away session access by deserializing the instance
 passport.deserializeUser(async (id, done) => {
   try {
@@ -40,6 +41,4 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
-module.exports = {
-  passport,
-};
+module.exports = passport;
