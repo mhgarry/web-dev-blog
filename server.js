@@ -11,8 +11,7 @@ const session = require('express-session');
 const PORT = process.env.PORT || 5000;
 
 const connect = require('./config/connection');
-const indexRouter = require('./controllers/index');
-
+const controller = require('./controllers/controller');
 const app = express();
 
 // setup handlebars engine
@@ -45,7 +44,7 @@ app.use(session({
   cookie: { secure: true }
 }));
 
-app.use('/', indexRouter);
+app.use('/', controller);
 
 connect.sync().then(() => {
   app.listen(PORT, () => console.log('Server listening on port %s', PORT));
