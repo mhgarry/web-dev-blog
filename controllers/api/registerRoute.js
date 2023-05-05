@@ -2,7 +2,7 @@ const { check, validationResult } = require('express-validator');
 const router = require('express').Router();
 const User = require('../models/User');
 const passport = require('passport');
-const jwt = require('jsonwebtoken');
+
 
 // register an account and save to database
 router.post('/register', [
