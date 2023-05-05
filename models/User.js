@@ -41,7 +41,7 @@ User.init(
       validate: {
         notEmpty: true,
         // modify password validation to allow for special characters
-        len: [8, 24],
+        len: [8, 32],
         is: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+!=])[A-Za-z\d@#$%^&+!=]+$/i,
       },
     },

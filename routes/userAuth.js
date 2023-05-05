@@ -2,6 +2,7 @@ const { check, validationResult } = require('express-validator');
 const router = require('express').Router();
 const User = require('../models/User');
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
 
 // register an account and save to database
 router.post('/register', [
@@ -10,7 +11,7 @@ router.post('/register', [
   check('username').isAlphanumeric(),
   check('password')
     .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+!=])[A-Za-z\d@#$%^&+!=]+$/i)
-    .isLength({ min: 8, max: 24 }),
+    .isLength({ min: 8, max: 32 }),
 ], async (req, res) => {
   //check for validation errors
   const errors = validationResult(req);
