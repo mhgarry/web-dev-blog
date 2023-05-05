@@ -21,10 +21,14 @@ router.post('/register', [
 
   // create and save new user from form data
   const { email, password, username } = req.body;
+	try {
   const user = await User.create({ email, username, password });
-	user = user.save();
   // send user to dashboard page and successfully star their session
   res.redirect('/dashboard');
+} catch (err) {
+	console.error(err);
+	res.status(500).json({ message: 'Something went wrong, please refresh the page and try again.'});
+}
 });
 // login to account and start session
 // login route
