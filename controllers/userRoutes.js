@@ -1,6 +1,6 @@
 const express = require('express')
 const permissions = require('./api/permissionsRoute');
-
+const router = express.Router();
 
 
 router.get('/dashboard', async (req, res, next) => {
@@ -17,7 +17,7 @@ router.get('/dashboard', async (req, res, next) => {
 router.get('/post', async (req, res, next) => {
 	try {
 	await permissions()(req, res, next);
-	res.render('dashboard', { user: req.user });
+	res.render('post', { user: req.user });
 	res.status(200).json({successfulLogin});
 	} catch (error) {
     console.error(error);
@@ -28,7 +28,7 @@ router.get('/post', async (req, res, next) => {
 router.get('/interact', async (req, res, next) => {
 	try {
 	await permissions()(req, res, next);
-	res.render('dashboard', { user: req.user });
+	res.render('interact', { user: req.user });
 	res.status(200).json({successfulLogin});
 	} catch (error) {
     console.error(error);

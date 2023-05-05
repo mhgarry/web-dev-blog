@@ -1,7 +1,7 @@
 // creating permissions for our user api
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const { User } = require('../models');
+const  User = require('../../models/User');
 const router = require('express').Router();
 
 const jwtSecret = process.env.JWT_SECRET;
@@ -9,7 +9,7 @@ const invalidCredentials = 'Invalid username or password';
 const somethingWentWrong = 'Something went wrong';
 const successfulLogin = 'You/re in, time to dump your memory to this some posts';
 
-const givePermissions = () => async (req, res, next) => {
+const givePermissions = async (req, res, next) => {
   try {
     const token = req.headers.authorization?.replace('Bearer ', '');
     const decoded = jwt.verify(token, jwtSecret);
@@ -27,4 +27,5 @@ const givePermissions = () => async (req, res, next) => {
   }
 };
 
-modules.export = { router, givePermissions };
+module.exports = givePermissions;
+module.exports = router;
