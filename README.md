@@ -13,29 +13,5 @@ https://expressjs.com/en/advanced/best-practice-performance.html
 https://expressjs.com/en/
 https://handlebarsjs.com/en/best-practice-performance.html
 https://blog.bitsrc.io/pagination-with-sequelize-explained-83054df6e041
-- app.js
-
-- config
-  - config.json
-- controllers
-  - indexController.js
-  - userController.js
-- models
-  - index.js
-  - user.js
-- public
-  - css
-    - style.css
-  - js
-    - app.js
-- routes
-  - index.js
-  - users.js
-- views
-  - layouts
-    - main.handlebars
-  - partials
-    - footer.handlebars
-    - header.handlebars
-  - index.handlebars
-  - user.handlebars
+https://www.digitalocean.com/community/tutorials/nodejs-uploading-files-multer-express
+https://blog.logrocket.com/multer-nodejs-express-upload-file/
